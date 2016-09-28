@@ -6,15 +6,17 @@
 
 package webtermites;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
-import webtermites.wf_access;
+
+import webtermites.wfaccess;
 import webtermites.procs;
 
 public class termites {
 
 	String srcURL;
 	
-	wf_access execute = new wf_access();
+	wfaccess execute = new wfaccess();
 	
 	// Default constructor if input url is null
 	termites() {	
@@ -29,20 +31,34 @@ public class termites {
 	
 	
 	// Main WebTermites Flow
-	public static void termitesFlow(String url) throws MalformedURLException{
+	public void termitesFlow(String url) throws MalformedURLException{
 		
 		// Workflow Access
 		procs.printlog("INFO::Workflow Access Start.");
-		String wf_accessProcess = wf_access.checkUrlAccessibility(url);
+		String wf_accessProcess = wfaccess.checkUrlAccessibility(url);
 		
 		if (wf_accessProcess.endsWith("200")){
 			
 			//Workflow Read HTML
-			procs.printlog("INFO::Workflow Access Start.");
+			procs.printlog("INFO::Workflow Read HTML Start.");
+			String fami = null;
 			
-			
+			try {
+				
+				wfreadhtml.hrefTest(url, "Test_Report.html");
+				procs.printlog("INFO::Workflow Read HTML Finished.");
+				
+			} catch (IOException e) {
+				procs.printlog("FAIL::wfreadhtml Fail.");
+				e.printStackTrace();
+			}	
 		}
 		
+		// Workflow publish report
+		//procs.printlog("INFO::Workflow Publish Report Start.");
+		
+		
+		procs.printlog("INFO::WebTermite test finished.");
 		
 	}
 	

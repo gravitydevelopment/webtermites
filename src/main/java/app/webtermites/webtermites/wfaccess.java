@@ -10,7 +10,7 @@ import java.net.MalformedURLException;
 import webtermites.procs;
 
 
-public class wf_access {
+public class wfaccess {
 	
 	// Method to check the web url accessibility
 	public static String checkUrlAccessibility( String siteUrl) {
@@ -22,7 +22,7 @@ public class wf_access {
 			
 			procs.printlog("INFO::wf_access:: Checking the site accessibility.");
 			
-			accessCode= (procs.checkUrlAccessibility(siteUrl));
+			accessCode= (procs.checkUrlAccessibility("",siteUrl));
 			
 			if (accessCode.matches("200")){
 				procs.printlog("INFO::wf_access:: Succeed Access "+siteUrl+" . success code "+accessCode);
