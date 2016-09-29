@@ -53,18 +53,20 @@ public class wfreadhtml {
 		int k =0;
 		for (Element link : links) {
 			
-			String accessTest= procs.checkUrlAccessibility(srcWebUrl, link.attr("href"));			
-			//System.out.println("title : "+link.attr("title")+" :: href : "+link.attr("href")+" :: Access Test: "+accessTest);
-		    
-		    totalLink ++;
-		    
-		    // Write out to the report
-		    String content ="<tr><th>"+totalLink+"</th><th>"+link.attr("href")+"</th><th>"+accessTest+"</th></tr>";
-		    procs.writeToFile(srcReport, content);
-		    
-		    if (accessTest.contentEquals("200")){
+			if (!link.attr("href").isEmpty() && link.attr("href") != null ) {
+				
+				String accessTest= procs.checkUrlAccessibility(srcWebUrl, link.attr("href"));			
+				//System.out.println("title : "+link.attr("title")+" :: href : "+link.attr("href")+" :: Access Test: "+accessTest);
+				
+				totalLink ++;
+				
+				// Write out to the report
+				String content ="<tr><th>"+totalLink+"</th><th>"+link.attr("href")+"</th><th>"+accessTest+"</th></tr>";
+				procs.writeToFile(srcReport, content);
+				if (accessTest.contentEquals("200")){
 		    	totalSuccessAccess ++;
-		    } 
+				}
+			}
 	    }
 	
 		totalFailAccess = totalLink-totalSuccessAccess;
