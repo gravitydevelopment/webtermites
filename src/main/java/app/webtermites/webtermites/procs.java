@@ -83,10 +83,19 @@ public class procs {
 		
 		String result;
 		String newTestUrl = testUrl;
+				
 		if (testUrl.substring(0,1).matches("/")) {
 			
-			newTestUrl = testUrl.substring(0, 1).replace("/", siteUrl);	
+			newTestUrl = testUrl.replaceFirst("/", siteUrl+"/");
+			System.out.println("The Slash Bear Said "+newTestUrl);	
+			
+		} else if (testUrl.substring(0,1).matches("#")) {
+			
+			newTestUrl = testUrl.replaceFirst("#", siteUrl+"/");	
+			System.out.println("The HashTag Bear Said "+newTestUrl);
 		}
+		
+		//System.out.println("FAMI TEST: " +newTestUrl);
 		 		
 		try {
             URL url = new URL(newTestUrl);
@@ -98,7 +107,6 @@ public class procs {
             
             if (code == 200) {
             	
-                //result = 200;
             	result = Integer.toString(code);
                 
             } else {

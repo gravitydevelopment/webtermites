@@ -22,7 +22,7 @@ import webtermites.termites;
 public class init {
 	
 	public static void main (String[] args) throws IOException{
-		
+				
 		// CLI Input Option
 		Options options = new Options();
 		Option url = new Option("u", "url", true, "Insert Web url.");
@@ -46,8 +46,6 @@ public class init {
         }
         
         String inputUrl = cmd.getOptionValue("url");
-
-		//String str1 = "http://stage-catho-companies.companyreview.co/por-dentro/";
         
         if (inputUrl == null){
         	

@@ -23,6 +23,12 @@ public class wfreadhtml {
 		int totalSuccessAccess = 0;
 		int totalFailAccess = 0;
 		
+		//Uncanonical the url
+		//TODO : check if the the url end with /, cut it
+		String fullSrcUrl = srcWebUrl.substring(srcWebUrl.indexOf('.'));
+		String cutUrl = fullSrcUrl.substring(fullSrcUrl.indexOf('/'));
+		String cleanWebUrl = srcWebUrl.replaceAll(cutUrl, "");
+		
 		//Document doc = Jsoup.connect("http://stage-catho-companies.companyreview.co/por-dentro/").get();
 		Document doc = Jsoup.connect(srcWebUrl).get();
 		Document blank = null ;
@@ -55,7 +61,7 @@ public class wfreadhtml {
 			
 			if (!link.attr("href").isEmpty() && link.attr("href") != null ) {
 				
-				String accessTest= procs.checkUrlAccessibility(srcWebUrl, link.attr("href"));			
+				String accessTest= procs.checkUrlAccessibility(cleanWebUrl, link.attr("href"));			
 				//System.out.println("title : "+link.attr("title")+" :: href : "+link.attr("href")+" :: Access Test: "+accessTest);
 				
 				totalLink ++;
@@ -63,8 +69,10 @@ public class wfreadhtml {
 				// Write out to the report
 				String content ="<tr><th>"+totalLink+"</th><th>"+link.attr("href")+"</th><th>"+accessTest+"</th></tr>";
 				procs.writeToFile(srcReport, content);
+				
 				if (accessTest.contentEquals("200")){
-		    	totalSuccessAccess ++;
+					
+					totalSuccessAccess ++;
 				}
 			}
 	    }
